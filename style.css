@@ -1,0 +1,48 @@
+body {
+	background-color: #111;
+	color: #eee;
+}
+button {
+	color: #fff;
+	background-color: #22ee44;
+	padding: 20px 18px;
+	border-radius: 40px;
+	text-transform: uppercase;
+	font-size: 1.61em;
+	border-width: 5px;
+}
+button:focus {
+	background-color: #11dd33;
+}
+h1, h3, p {
+	text-align: center;
+}
+
+#map {
+	border: 1px solid #e9e9e9;
+}
+
+.card {
+	display: inline-block;
+	color: #333;
+	background-color: #eee;
+	padding: 30px;
+	margin: 15px;
+	border-radius: 30px;
+	text-align: center;
+}
+.half {
+	min-width: 400px;
+}
+
+.container {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: stretch;
+}
+
+.controls {
+	flex-wrap: nowrap;
+	justify-content: center;
+}
