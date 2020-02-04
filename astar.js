@@ -1,7 +1,8 @@
 /**
  *	Implements the a-star algorithm
+ * 	by Matthew Graham
  */
-goog.provide( 'mcc.pathfinding.Astar' ); // create namespace in the google closure library
+goog.provide( 'mcc.pathfinding.Astar' ); 
 
 goog.require( 'mcc.pathfinding.Element' );
 goog.require( 'goog.structs.PriorityQueue' ); 

@@ -1,11 +1,12 @@
+/**
+ *	An container to hold a point as part of path
+ *	by Matthew Graham
+ */
+
 goog.provide( 'mcc.pathfinding.Element' );
  
  
- /**
- * Creates a new  
- * @param {Map} map The map of the space
- * @constructor
- */
+ 
 mcc.pathfinding.Element = function( point, parent=null ){
 	this.point = point;
 	this.parent = parent;
