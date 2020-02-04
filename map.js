@@ -16,10 +16,10 @@ mcc.map.Map = function( element_id ) {
 	this.bounding_box = [0,0,20,20];
 	this.padding = 1;
 	this.board; // the JSXGraph object to draw on
-	this.prototype.obstacles;
-	this.prototype.start;
-	this.prototype.goal;
-	this.prototype.big_box;
+	this.obstacles;
+	this.start;
+	this.goal;
+	this.big_box;
 }
 		
 		
