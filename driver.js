@@ -1,9 +1,21 @@
 goog.require( 'mcc.map.Map' );
 goog.require( 'mcc.pathfinding.Astar' );
 
-var btn = document.getElementById( 'apply' );
-var mapNameDD = document.getElementById( 'mapName' );
-var map = new mcc.map.Map( 'jxgbox' );
+var ctrl = {
+	map: new mcc.map.Map( 'jxgbox' ),			// map
+	mapName: document.getElementById( 'mapName' ), // mapNameDD
+	speed: document.getElementById( 'speed' ), // 0-100
+	isConstrained: document.getElementById( 'isConstrained' ), // is there a constraint on the search
+	constraint: document.getElementById( 'constraint' ), // the value for the constraint
+	run: document.getElementById( 'apply' ), // btn
+};
+
+// constrained by default for assignment 2
+ctrl.isConstrained.checked = true;
+if( ctrl.isConstrained.checked ) {
+	ctrl.constraint.type = 'text'; // toggle c textbox
+	ctrl.constraint.style.width = '30px';
+}
 
 
 
@@ -12,7 +24,7 @@ var map = new mcc.map.Map( 'jxgbox' );
 var maps = new Object(); 
 
 maps.assignment1 = { // ASSIGNMENT 1 MAP
-	start: [ 1,8],
+	start: [ 1,8],					// shortest path = 20.390
 	goal:  [18,0],
 	obstacles: [					// Coordinates for the polygons to be placed 
 		[[2,10],[2,8],[10,8],[10,10]],	// in the map. Each polygon must be convex.
@@ -29,7 +41,7 @@ maps.assignment1 = { // ASSIGNMENT 1 MAP
 
 
 maps.assignment2 = { // ASSIGNMENT 2 MAP
-	start: [ 22,-3],
+	start: [ 22,-3],				// shortest path = 66.847
 	goal:  [11,4],
 	obstacles: [
 		rect( [23,-2], [25,-1] ), 	// 1
@@ -38,7 +50,7 @@ maps.assignment2 = { // ASSIGNMENT 2 MAP
 		rect( [26,0], [27,24] ), 	// 4
 		rect( [0,23], [27,24] ), 	// 5
 		rect( [0,0], [1,24] ), 		// 6
-		rect( [0,0], [22,1] ), 		// 7
+		rect( [0,0], [21.5,1] ), 		// 7
 		rect( [21,-2 ], [22,5] ), 	// 8
 		rect( [20,-2 ], [22,-1] ), 	// 9
 		rect( [21,6 ], [22,20] ), 	// 10
@@ -102,31 +114,52 @@ for( var i=0; i<4; i++ ) {
 
 
 
-map.draw( maps[mapNameDD.value] ); // draw the default map
+ctrl.map.draw( maps[ctrl.mapName.value] ); // draw the default map
 
 
 
 // ADD EVENT LISTENERS
 
 // Map change from dropdown
-mapNameDD.addEventListener( 'change', function( event )  {
-	JXG.JSXGraph.freeBoard( map.board );
-	map = new mcc.map.Map( 'jxgbox' );
-	map.draw( maps[event.target.value] );
+ctrl.mapName.addEventListener( 'change', function(e)  {
+	JXG.JSXGraph.freeBoard( ctrl.map.board );
+	ctrl.map = new mcc.map.Map( 'jxgbox' );
+	ctrl.map.draw( maps[e.target.value] );
+} );
+// Option - Constraint
+ctrl.isConstrained.addEventListener( 'change', function(e) {
+	//console.log(ctrl.constraint);
+	ctrl.constraint.type = e.target.checked ? 'text' : 'hidden'; // toggle c textbox
+	ctrl.constraint.style.width = '30px';
 } );
 // Run
-btn.addEventListener( 'click', function() { 	   // add an onclick to the apply button
-	const astar = new mcc.pathfinding.Astar( map );
+ctrl.run.addEventListener( 'click', function(e) { 	   // add an onclick to the apply button
+	document.getElementById( "message" ).innerHTML = '';
+	
+	
+	JXG.JSXGraph.freeBoard( ctrl.map.board );
+	ctrl.map = new mcc.map.Map( 'jxgbox' );
+	ctrl.map.draw( maps[ctrl.mapName.value] );
+	
+	const astar = new mcc.pathfinding.Astar( ctrl );
 } ); 
 // Print a new candidate path
 window.addEventListener( 'newPath', function(e) {  // listen for the algorithm to trigger a newPath event
-	map.drawSegment( e.detail.p1, e.detail.q1 );   // show the segment on the board
+	ctrl.map.drawSegment( e.detail.p1, e.detail.q1 );   // show the segment on the board
 } );
 // Print the found goal path
 window.addEventListener( 'goalPath', function(e) { // listen for the algorithm to trigger a goalPath event
-	map.drawChosenPath( e.detail.goal ); 		   // show the chosen path on the board
+	if( e.detail.goal ) {
+		ctrl.map.drawChosenPath( e.detail.goal ); 		   // show the chosen path on the board
+	} else {
+		document.body.style.backgroundColor = "#d23";
+		window.setTimeout( function() {
+			document.body.style.backgroundColor = "#000";
+		}, 200 );
+		var message = "No path found that meets the given constraint.";
+		document.getElementById( "message" ).innerHTML = message;
+	}
 } );
-
 
 
  

@@ -15,6 +15,7 @@
 	<p class="instructions">
 		Manipulate the controls, then press GO. Try dragging the Start and Goal points around the map!
 	</p>
+	<p id="message"></p>
 	
 	<div class="container">
 	
@@ -56,8 +57,13 @@
 			
 				<h2>Algorithm</h2>
 				
-				<label for="frameDelay">Speed</label><BR>
-				<input type="range" id="frameDelay" name="frameDelay" min="0" max="400" value="100">
+				<label for="speed">Speed</label><BR>
+				<input type="range" id="speed" name="speed" min="0" max="100" value="100">
+				<P>
+				<h3>Options</h3>
+				<input type="checkbox" id="isConstrained" name="isConstrained">
+				<label for="isConstrained">Constrain</label>
+				<input type="hidden" id="constraint" name="constraint" value="0">
 				<P>
 				<button id="apply">Go</button>
 				

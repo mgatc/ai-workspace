@@ -1,6 +1,7 @@
 body {
 	background-color: #111;
 	color: #eee;
+	transition: background-color 1s cubic-bezier(0.19, 1, 0.22, 1);
 }
 button {
 	color: #fff;
@@ -20,6 +21,11 @@ h1, h3, p {
 
 #map {
 	border: 1px solid #e9e9e9;
+}
+#message {
+	style: block;
+	color: #d23;
+	height: 1em;
 }
 
 .card {

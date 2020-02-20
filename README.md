@@ -22,6 +22,7 @@ Versions
 ------------
 
 1.	Assignment 1.  Introduces the environment and implements the A* algorithm. 
+2.  Assignment 2.  Introduces a new map and allows for a constraint to be placed on the search.
 
 
 

@@ -14,14 +14,17 @@ goog.require( 'goog.structs.PriorityQueue' );
  * @param {Map} map The map of the space
  * @constructor
  */
-mcc.pathfinding.Astar = function( map ) {
-	this.setMap( map ); 
+mcc.pathfinding.Astar = function( ctrl ) {
+	this.setMap( ctrl.map ); 
 	//console.log(this.map);
 	
 	this.open = new goog.structs.PriorityQueue(); 
 	this.closed = [];
-	this.frameDelay = document.getElementById('frameDelay').value;
-	
+	if( ctrl.isConstrained.checked ) 
+		this.c = ctrl.constraint.value;
+	this.speed = ctrl.speed.value; // speed from 0-100
+	this.frameDelay = ( 100 - this.speed ) * 4; // calculate delay in ms
+
 	this.run();
 }
 
@@ -48,7 +51,7 @@ mcc.pathfinding.Astar.prototype.run = function() {
 		
 			//console.log(best);
 		if( best.parent != null ) {
-			// instead of directly drawing the segment, throw an event for a listener to catch and draw outside of Astar
+			// throw an event for a listener to catch and draw outside of Astar
 			var event = new CustomEvent( 'newPath', {
 				detail: {
 					p1: best.point, 
@@ -61,9 +64,10 @@ mcc.pathfinding.Astar.prototype.run = function() {
 		self.closed.push( best.point );	// put it in closed
 		
 		self.action( best );
-		if( mcc.map.pointIsEqual( best.point, self.map.goal ) ) {
+		
+		if( mcc.map.pointIsEqual( best.point, self.map.goal ) ) { // goal test
 			clearInterval( delay );
-			
+			console.log( best.f() );
 			// instead of directly drawing the segment, throw an event for a listener to catch and draw outside of Astar
 			var event = new CustomEvent( 'goalPath', {
 				detail: {
@@ -71,9 +75,14 @@ mcc.pathfinding.Astar.prototype.run = function() {
 				}
 			} );
 			window.dispatchEvent( event );
-		} else if( self.open.isEmpty() ) {
+		} else if( self.open.isEmpty() ) { // No path found
 			clearInterval( delay );
-			console.log('no path found');
+			var event = new CustomEvent( 'goalPath', {
+				detail: {
+					
+				}
+			} );
+			window.dispatchEvent( event );
 		} 
 	}, this.frameDelay );
 	
@@ -114,7 +123,11 @@ mcc.pathfinding.Astar.prototype.action = function( el ) {
 		//console.log(q1, ! this.closed.includes( q1 ));
 		
 		if( ! this.closed.includes( q1 ) ) {	// is the candidate already visited?
-
+			var child = new mcc.pathfinding.Element( q1, el );
+			
+			if( this.c && child.f() > this.c ) { // Check for constaint condition
+				continue points;
+			}
 			// if segment does NOT intersect with any line in E, add q1 to open
 			edges: for( var j=0; j<this.map.E.length; j++ ) {
 				var p2 = this.map.E[j][0],
@@ -126,7 +139,6 @@ mcc.pathfinding.Astar.prototype.action = function( el ) {
 					continue points;
 				} 
 			}
-			var child = new mcc.pathfinding.Element( q1, el );
 			this.open.enqueue( child.f(), child ); // add the point to the PQ
 		}
 	}
