@@ -11,7 +11,7 @@ var ctrl = {
 };
 
 // constrained by default for assignment 2
-ctrl.isConstrained.checked = true;
+//ctrl.isConstrained.checked = true;
 if( ctrl.isConstrained.checked ) {
 	ctrl.constraint.type = 'text'; // toggle c textbox
 	ctrl.constraint.style.width = '30px';
