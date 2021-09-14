@@ -1,8 +1,7 @@
 # A* Workspace
 
-
-This project is meant to provide a browser-based workspace for the development and 
-demonstration of pathfinding algorithms. 
+A* is an optimal graph-search algorithm that is commonly considered be to "artificial intelligence." This supposed intellect comes from the use of heuristics, or computational shortcuts that usually increase the speed to find a goal. This project is meant to provide a browser-based workspace for the development and
+demonstration of the A* algorithm in two-dimensions. The heuristic here prefers to explore paths whose sum of current length and distance to goal is minimized. The Assignment 1 and 2 maps demonstrate this heuristic working well and working poorly, respectively.
 
 A live version is available at https://mgatc.github.io/ai-workspace/. Use Google Chrome for best results.
 
@@ -12,14 +11,14 @@ A live version is available at https://mgatc.github.io/ai-workspace/. Use Google
 Dependencies
 ------------
 
-1.	JSXGraph.  A javascript geometry library for visualization. 
+1.	JSXGraph.  A javascript geometry library for visualization.
 	https://jsxgraph.uni-bayreuth.de/wp/index.html
-	
+
 2.	Google Closure Library.  Used for Priority Queue.
 	https://developers.google.com/closure/library
-	
-	
-	
+
+
+
 ----------------------
 Potential Improvements
 ----------------------
