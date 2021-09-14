@@ -1,46 +1,46 @@
 <html>
 <head>
-	<title>Introduction to AI Workspace</title>
+	<title>Introduction to A* Workspace</title>
 	<link rel="stylesheet" type="text/css" href="style.css" >
-	
+
 	<!--JSX Graph https://jsxgraph.org/docs/index.html-->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.7/jsxgraph.css" />
 
 </head>
 <body>
-	<h1>Introduction to AI Workspace</h1>
-	
+	<h1>Introduction to A* Workspace</h1>
+
 	<h3>Matthew Graham, CAP5605</h3>
-	
+
 	<p class="instructions">
-		Manipulate the controls, then press GO. Try dragging the Start and Goal points around the map!
+		Manipulate the controls, then press GO. Try dragging the Start and Goal points around the map! For best results, use Google Chrome.
 	</p>
 	<p id="message"></p>
-	
+
 	<div class="container">
-	
-	
+
+
 		<div class="card half">
 			<div id="jxgbox" class="jxgbox" style="width:400px; height: 400px;">
 			</div>
 		</div>
-		
-		
-		
+
+
+
 		<div class="container half controls">
 			<div class="card">
-			
+
 				<h2>Map</h2>
-				
+
 				<!-- ADD MAPS HERE TO BE ABLE TO SELECT THEM-->
-				
+
 				<select id="mapName" name="mapName">
 					<option value="assignment1" >Assignment 1</option>
 					<option value="assignment2" selected="true">Assignment 2</option>
 					<option value="simple">Simple</option>
 					<option value="grid">Grid</option>
 				</select>
-				
+
 				<!--
 				<P>
 				<label for="obSize">Obstacle Size</label><BR>
@@ -50,13 +50,13 @@
 				<input type="range" id="obDensity" name="obDensity" min="10" max="40">-->
 
 			</div>
-		
-		
-		
+
+
+
 			<div class="card">
-			
+
 				<h2>Algorithm</h2>
-				
+
 				<label for="speed">Speed</label><BR>
 				<input type="range" id="speed" name="speed" min="0" max="100" value="100">
 				<P>
@@ -66,25 +66,25 @@
 				<input type="hidden" id="constraint" name="constraint" value="0">
 				<P>
 				<button id="apply">Go</button>
-				
+
 			</div>
-			
-			
+
+
 		</div>
-		
+
 	</div>
-	
-	
-	
+
+
+
 	<!-- THIRD-PARTY DEPENDENCIES -->
 	<script type="text/javascript" charset="UTF-8" src="closure-library/closure/goog/base.js"></script>
 	<script type="text/javascript" charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.7/jsxgraphcore.js"></script>
-	
+
 	<!-- ORIGINAL CODE -->
 	<script type="text/javascript" charset="UTF-8" src="map.js"></script>
 	<script type="text/javascript" charset="UTF-8" src="element.js"></script>
 	<script type="text/javascript" charset="UTF-8" src="astar.js"></script>
 	<script type="text/javascript" charset="UTF-8" src="driver.js"></script>
-	
+
 </body>
 </html>

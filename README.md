@@ -1,28 +1,10 @@
-# ai-workspace
+# A* Workspace
 
 
-
-Matthew Graham
-n00612546
-CAP5605
-
-
-
-This project is meant to provide a web-based workspace for the development and 
+This project is meant to provide a browser-based workspace for the development and 
 demonstration of pathfinding algorithms. 
 
-To view, open index.html in a web browser.
-
-A live version is also available at https://mgatc.github.io/ai-workspace/
-
-
-
-------------
-Versions
-------------
-
-1.	Assignment 1.  Introduces the environment and implements the A* algorithm. 
-2.	Assignment 2.  Introduces a new map and allows for a constraint to be placed on the search.
+A live version is available at https://mgatc.github.io/ai-workspace/. Use Google Chrome for best results.
 
 
 
@@ -43,3 +25,4 @@ Potential Improvements
 ----------------------
 
 1.	Current implementation uses naive collision detection methods, slowing performance in environments with a large number of obstacles. Implementing a physics engine could improve this project.
+2.	The UI could be improved to maximize the size of the user viewpoint into the search world. See https://mgatc.github.io/bounded-degree-plane-spanners/.
